@@ -27,6 +27,9 @@ from questylib.game import GenericGame
 from questylib.world import World
 import forestquest.places as plc
 
+def loading_data(event):
+    print event
+
 class Game(GenericGame):
     name = 'ForestQuest'
     shortname = 'fquest'
@@ -43,6 +46,18 @@ more about this on <http://metanohi.org/projects/forestquest/>.''')
         self.world = World(self.sys, self.size)
         self.world.start()
 
+        # Load icon
+        self.world.load_icon('icon-32x32.png')
+
+        # Image to be shown while loading
+        self.startbg = self.world.load_image('startbg.jpg', False)
+        self.world.show_image(self.startbg)
+        self.sys.signalactions.add('beforecharactercreate',
+                                   loading_data)
+        self.sys.signalactions.add('beforeplacesload', loading_data)
+        self.sys.signalactions.add('afterplaceload', loading_data)
+        self.sys.signalactions.add('afterplacesload', loading_data)
+
         # Character creation
         self.protagonist = self.world.create_character(
             'protagonist', self.get_data('protagonist'))
@@ -51,12 +66,12 @@ more about this on <http://metanohi.org/projects/forestquest/>.''')
 
         # Loading of places
         self.load_places('places/images', 'places/okpositions')
-
-        self.use_data_from_map('places/map-details')
         places = self.world.places
         places[0].power = 1.55
         places[1].power = 1.6
         places[2].power = 1.55
+
+        self.use_data_from_map('places/map-details')
 
         self.world.set_place(places[0])
 
