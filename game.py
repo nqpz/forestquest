@@ -23,14 +23,29 @@
 ##[ Maintainer  ]## Niels Serup <ns@metanohi.org>
 ##[ Description ]## Controls the ForestQuest game
 
-from questylib.game import GenericGame
-from questylib.world import World
-import forestquest.places as plc
+forestquest_help = '''\
+This is ForestQuest, an RPG game meant to be run using the Questy RPG
+engine. If you have Questy installed, it is advised that you run
+it like this if you want to play ForestQuest:
 
-def loading_data(event):
-    print event
+    $ questy forestquest
 
-class Game(GenericGame):
+Both Questy and ForestQuest must be properly installed for this to
+work. Downloads and installation instructions are available at
+<http://metanohi.org/projects/questy/> and at
+<http://metanohi.org/projects/forestquest/>.'''
+
+try:
+    from questylib.game import GenericGame
+    from questylib.world import World
+    import forestquest.places as plc
+    from forestquest.startupscreen import StartupScreen
+except ImportError:
+    import sys
+    print forestquest_help
+    sys.exit()
+
+class Game(GenericGame, StartupScreen):
     name = 'ForestQuest'
     shortname = 'fquest'
 
@@ -47,20 +62,16 @@ more about this on <http://metanohi.org/projects/forestquest/>.''')
         self.world.start()
 
         # Load icon
-        self.world.load_icon('icon-32x32.png')
+        self.world.load_icon('icons/icon-32x32.png')
 
-        # Image to be shown while loading
-        self.startbg = self.world.load_image('startbg.jpg', False)
-        self.world.show_image(self.startbg)
-        self.sys.signalactions.add('beforecharactercreate',
-                                   loading_data)
-        self.sys.signalactions.add('beforeplacesload', loading_data)
-        self.sys.signalactions.add('afterplaceload', loading_data)
-        self.sys.signalactions.add('afterplacesload', loading_data)
+        self.std_font = self.world.create_font(path='fonts/chumbly.ttf')
+
+        # Start startup screen
+        self.start_startupscreen('startbg')
 
         # Character creation
         self.protagonist = self.world.create_character(
-            'protagonist', self.get_data('protagonist'))
+            'protagonist', self.get_path_data('protagonist'))
         self.world.add_character(self.protagonist)
         self.world.set_leading_character(self.protagonist)
 
@@ -73,6 +84,9 @@ more about this on <http://metanohi.org/projects/forestquest/>.''')
 
         self.use_data_from_map('places/map-details')
 
+        # End startup screen
+        self.end_startupscreen()
+
         self.world.set_place(places[0])
 
     def run_game(self):
@@ -81,14 +95,4 @@ more about this on <http://metanohi.org/projects/forestquest/>.''')
 
 
 if __name__ == '__main__':
-    print '''\
-This is ForestQuest, an RPG game meant to be run using the Questy RPG
-engine. If you have Questy installed, it is advised that you run
-it like this if you want to play ForestQuest:
-
-    $ questy forestquest
-
-Both Questy and ForestQuest must be properly installed for this to
-work. Downloads and installation instructions are available at
-<http://metanohi.org/projects/questy/> and at
-<http://metanohi.org/projects/forestquest/>.'''
+    print forestquest_help
