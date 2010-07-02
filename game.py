@@ -51,15 +51,16 @@ class Game(GenericGame, StartupScreen):
 
     def start_game(self):
         self.status('''\
-Welcome to ForestQuest. This is version 0.1 of the game. ForestQuest
--- both code and media -- is free software/content under the terms of
-the GNU GPLv3+. Media is also available under the terms of the
-Creative Commons Attribution-ShareAlike 3.0 Unported license. Read
-more about this on <http://metanohi.org/projects/forestquest/>.''')
+Welcome to ForestQuest. This is version 0.1 of the game. ForestQuest's
+program part is free software under the terms of the GNU GPLv3+. Its
+data part is free content under the Creative Commons
+Attribution-Share Alike 3.0+ Unported license. Read more about this on
+<http://metanohi.org/projects/forestquest/>.''')
 
-        self.status('Loading data...')
         self.world = World(self.sys, self.size)
         self.world.start()
+
+        self.status('Loading data...')
 
         # Load icon
         self.world.load_icon('icons/icon-32x32.png')
@@ -76,7 +77,7 @@ more about this on <http://metanohi.org/projects/forestquest/>.''')
         self.world.set_leading_character(self.protagonist)
 
         # Loading of places
-        self.load_places('places/images', 'places/okpositions')
+        self.load_places('places/images', 'places/okpositions', 'places/overlays')
         places = self.world.places
         places[0].power = 1.55
         places[1].power = 1.6

@@ -31,7 +31,7 @@ from questylib.various import thread
 class StartupScreen:
     def loading_data(self, event):
         if event.name == 'beforecharactercreate':
-            s = 'Creating character %s...' % event.args[0]
+            s = 'Creating character "%s"...' % event.args[0]
         elif event.name == 'beforeplacesload':
             self.startup_places_num = event.args[1]
             s = 'Loading places...'
@@ -60,7 +60,7 @@ class StartupScreen:
             if i == m or i == -1:
                 w *= -1
                 i += w * 2
-            time.sleep(0.15)
+            time.sleep(0.1)
 
     def start_startupscreen(self, infopath):
         pinfo = self.get_path_data(infopath)[1]['.'][1]
