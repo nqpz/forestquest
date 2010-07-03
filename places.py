@@ -24,10 +24,15 @@
 ##[ Description ]## Contains classes for places with special structures
 
 
-class UpAndDown:
-    def __init__(self, world):
+class PlaceChanger:
+    def __init__(self, world, *args):
         self.world = world
+        self.init(*args)
 
+    def init(self, *args):
+        pass
+
+class UpAndDown(PlaceChanger):
     def __call__(self, pos):
         s = self.world.size[1] - pos[1]
         if s < 100:
@@ -36,3 +41,36 @@ class UpAndDown:
             return pos[0], self.world.size[1] - (200 - s)
         else:
             return pos[0], pos[1] + 200
+
+class AdvancedPower(PlaceChanger):
+    def init(self, power, minus = 0):
+        self.power = power
+        self.minus = minus
+
+    def __call__(self, pos):
+        return (float(pos[1]) / self.world.size[1]) ** self.power - self.minus
+
+class PlaceDetails:
+    def c(self, clas, *args):
+        return clas(self.world, *args)
+
+    def improve_places(self):
+        self.sys.emit_signal('beforeplacesimprove', self)
+        places = self.world.places
+        places[0].power = 1.6
+        places[1].power = 1.6
+        places[2].power = 1.8
+        places[3].set_char_size(self.c(AdvancedPower, 1.5, .2))
+        places[4].set_char_size(self.c(AdvancedPower, 1.5, .2))
+        places[5].power = 1.3
+        places[6].power = 1.4
+        places[7].set_char_size(self.c(AdvancedPower, 1.4, .15))
+        places[8].power = 1.7
+        places[9].set_char_size(self.c(AdvancedPower, 1.7, .2))
+        places[10].set_char_size(self.c(AdvancedPower, 1.8, .05))
+        places[11].set_char_size(self.c(AdvancedPower, 1.3, -.2))
+        places[12].set_char_size(self.c(AdvancedPower, 2.5, .05))
+        places[13].set_char_size(self.c(AdvancedPower, 1.7, .05))
+        places[14].power = 1.5
+        places[15].set_char_size(self.c(AdvancedPower, 1.65, .07))
+        self.sys.emit_signal('afterplacesimprove', self)

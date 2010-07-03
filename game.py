@@ -37,15 +37,14 @@ work. Downloads and installation instructions are available at
 
 try:
     from questylib.game import GenericGame
-    from questylib.world import World
-    import forestquest.places as plc
     from forestquest.startupscreen import StartupScreen
+    from forestquest.places import PlaceDetails
 except ImportError:
     import sys
     print forestquest_help
     sys.exit()
 
-class Game(GenericGame, StartupScreen):
+class Game(GenericGame, StartupScreen, PlaceDetails):
     name = 'ForestQuest'
     shortname = 'fquest'
 
@@ -57,7 +56,7 @@ data part is free content under the Creative Commons
 Attribution-Share Alike 3.0+ Unported license. Read more about this on
 <http://metanohi.org/projects/forestquest/>.''')
 
-        self.world = World(self.sys, self.size)
+        self.create_world()
         self.world.start()
 
         self.status('Loading data...')
@@ -76,19 +75,18 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
         self.world.add_character(self.protagonist)
         self.world.set_leading_character(self.protagonist)
 
-        # Loading of places
-        self.load_places('places/images', 'places/okpositions', 'places/overlays')
-        places = self.world.places
-        places[0].power = 1.55
-        places[1].power = 1.6
-        places[2].power = 1.55
+        # Load places
+        self.load_places('places/images', 'places/okpositions',
+                         'places/overlays')
+        self.improve_places()
 
-        self.use_data_from_map('places/map-details')
+        # Load map linking the places together
+        self.use_data_from_map('places/map')
 
         # End startup screen
         self.end_startupscreen()
 
-        self.world.set_place(places[0])
+        self.world.set_place(62, (300, 300))
 
     def run_game(self):
         self.status('Full speed!')

@@ -31,16 +31,24 @@ from questylib.various import thread
 class StartupScreen:
     def loading_data(self, event):
         if event.name == 'beforecharactercreate':
-            s = 'Creating character "%s"...' % event.args[0]
+            s = 'Creating character "%s"...' % event.args[1]
         elif event.name == 'beforeplacesload':
-            self.startup_places_num = event.args[1]
+            self.startup_places_num = event.args[2]
             s = 'Loading places...'
         elif event.name == 'beforeplaceload':
-            s = 'Loading place %s of %s...' % (event.args[1],
+            s = 'Loading place %s of %s...' % (event.args[2],
                                                self.startup_places_num)
         elif event.name == 'afterplacesload':
             del self.startup_places_num
             s = 'Finished loading places'
+        elif event.name == 'beforeplacesimprove':
+            s = 'Improving places...'
+        elif event.name == 'afterplacesimprove':
+            s = 'Finished improving places'
+        elif event.name == 'beforemapload':
+            s = 'Loading map...'
+        elif event.name == 'aftermapload':
+            s = 'Finished loading map'
         self.current_startup_string = s
 
     def animate_startbg(self):
