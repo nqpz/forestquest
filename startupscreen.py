@@ -24,7 +24,6 @@
 ##[ Description ]## Controls the loading screen of the startup process
 
 import os.path
-import time
 import pygame
 from questylib.various import thread
 
@@ -51,24 +50,29 @@ class StartupScreen:
             s = 'Finished loading map'
         self.current_startup_string = s
 
-    def animate_startbg(self):
+    def animate_startupbg(self):
+        clock = pygame.time.Clock()
         i = 0
+        j = 0
         w = 1
         m = len(self.startbgobjs)
         rectsurf = pygame.Surface((620, 50)).convert_alpha()
         rectsurf.fill((255, 255, 255, 200))
-        while not self.animating_startbg_done:
+        while not self.animating_startupbg_done:
             self.world.blit(self.startbg)
             self.world.blit(*self.startbgobjs[i])
             self.world.blit(rectsurf, (10, 410))
             self.world.blit(self.std_font.write(self.current_startup_string),
                             (20, 420))
             self.world.flip()
-            i += w
-            if i == m or i == -1:
-                w *= -1
-                i += w * 2
-            time.sleep(0.1)
+            j += 1
+            if j == 3:
+                j = 0
+                i += w
+                if i == m or i == -1:
+                    w *= -1
+                    i += w * 2
+            clock.tick(30)
 
     def start_startupscreen(self, infopath):
         pinfo = self.get_path_data(infopath)[1]['.'][1]
@@ -90,8 +94,8 @@ class StartupScreen:
         self.sys.signalactions.add('beforeplaceload', self.loading_data)
         self.sys.signalactions.add('afterplacesload', self.loading_data)
 
-        self.animating_startbg_done = False
-        thread(self.animate_startbg)
+        self.animating_startupbg_done = False
+        thread(self.animate_startupbg)
 
     def end_startupscreen(self):
         self.animating_startbg_done = True

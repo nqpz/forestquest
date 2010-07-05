@@ -38,13 +38,14 @@ work. Downloads and installation instructions are available at
 try:
     from questylib.game import GenericGame
     from forestquest.startupscreen import StartupScreen
+    from forestquest.startmenuscreen import StartMenu
     from forestquest.places import PlaceDetails
 except ImportError:
     import sys
     print forestquest_help
     sys.exit()
 
-class Game(GenericGame, StartupScreen, PlaceDetails):
+class Game(GenericGame, StartupScreen, StartMenu, PlaceDetails):
     name = 'ForestQuest'
     shortname = 'fquest'
 
@@ -85,6 +86,8 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
 
         # End startup screen
         self.end_startupscreen()
+
+        #self.start_startmenuscreen()
 
         self.world.set_place(62, (300, 300))
 
