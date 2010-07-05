@@ -98,7 +98,7 @@ class StartupScreen:
         thread(self.animate_startupbg)
 
     def end_startupscreen(self):
-        self.animating_startbg_done = True
+        self.animating_startupbg_done = True
         self.sys.signalactions.remove('beforecharactercreate',
                                    self.loading_data)
         self.sys.signalactions.remove('beforeplacesload', self.loading_data)
