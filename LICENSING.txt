@@ -1,0 +1,68 @@
+The Python files of ForestQuest are licensed under the GNU
+General Public License 3.0 (or any later version) This program part of
+ForestQuest is copyright © 2010 Niels Serup.
+
+Data files, described more carefully below, are generally licensed
+under the Creative Commons Attribution-Share Alike 3.0 (or any later
+version) Unported license, but variations may occur. Authors
+differ. Note that non-Niels Serup authors are not part of the
+ForestQuest project. They have merely been nice and released their
+works under free licenses.
+
+List of files with their respective licenses and authors (inside forestquest/data/)
+########################################################
+places/*, bike/*, icons/*, sounds/*
+License: CC BY-SA 3.0+
+Author:  Niels Serup <ns@metanohi.org>
+Copyright © 2010 Niels Serup
+Own work
+########################################################
+protagonist/*
+License: CC BY-SA 3.0
+Author:  Niels Serup <ns@metanohi.org>
+Copyright © 2010 Niels Serup
+Portions based on
+<http://commons.wikimedia.org/wiki/File:Gecko-oeil.jpg> by Jean-Pierre
+CAVELAN <http://commons.wikimedia.org/wiki/User:Yanpetro>,
+dual-licensed under CC BY-SA 1.0-3.0 and GNU GFDL 1.2+
+########################################################
+mantis0/*
+License: CC BY-SA 3.0
+Author:  Niels Serup <ns@metanohi.org>
+Copyright © 2010 Niels Serup
+Based on
+<http://commons.wikimedia.org/wiki/File:Praying_Mantis_Purcellville.JPG> by
+Scott E. Harris, dual-licensed under CC BY-SA 1.0-3.0 and GNU GFDL 1.2+
+########################################################
+startbg/*
+License: CC BY-SA 3.0+
+Author:  Niels Serup <ns@metanohi.org>
+Copyright © 2010 Niels Serup
+Portions based on
+<http://commons.wikimedia.org/wiki/File:Wing_suzukii.jpg>, released
+into the public domain
+########################################################
+fonts/chumbly.ttf
+License: Artistic License 2.0
+Copyright © 1995 - 2008 by Brian Kent <aefonts@frontiernet.net>
+Packaging copyright © 2008 Philip Newborough (aka corenominal)
+<mail@philipnewborough.co.uk>
+Details regarding this copyright are available at
+<http://packages.debian.org/changelogs/pool/main/t/ttf-aenigma/ttf-aenigma_0.0.20080510.dfsg-1/ttf-aenigma.copyright>.
+########################################################
+music/Alexander Blu*
+License: CC BY-SA 3.0
+Author:  Alexander Blu <http://www.alexanderblu.com/>
+########################################################
+music/Axial Ensemble*
+License: CC BY-SA 3.0
+Author:  Axial Ensemble
+<http://www.jamendo.com/en/artist/Axial_Ensemble>
+########################################################
+music/Renich*
+License: CC BY-SA 3.0
+Author:  Renich Bon Ciric <http://woralelandia.com/>
+########################################################
+music/zero-project*
+License: CC BY-SA 3.0
+Author:  zero-project <http://www.zero-project.gr/>
