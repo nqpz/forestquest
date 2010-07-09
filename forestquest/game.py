@@ -40,13 +40,14 @@ try:
     from forestquest.startupscreen import StartupScreen
     from forestquest.startmenuscreen import StartMenu
     from forestquest.places import PlaceDetails
+    from forestquest.bgmusic import BackgroundMusic
     import forestquest.generalinformation as ginfo
 except ImportError:
     import sys
     print forestquest_help
     sys.exit()
 
-class Game(GenericGame, StartupScreen, StartMenu, PlaceDetails):
+class Game(GenericGame, StartupScreen, StartMenu, PlaceDetails, BackgroundMusic):
     name = 'ForestQuest'
     shortname = 'fquest'
 
@@ -78,8 +79,8 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
         self.mantis0 = self.load_character('mantis0')
 
         # Load sounds and music
-        self.waves = self.load_sound('sounds/birds.ogg')
-        self.waves.play()
+        self.sounds = self.load_sounds('sounds')
+        self.music = self.load_sounds('music')
 
         # Load places
         self.load_places('places/images', 'places/okpositions',
@@ -89,6 +90,14 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
         # Load map linking the places together
         self.use_data_from_map('places/map')
 
+        # Load message boxes
+        self.msgbox = \
+            self.load_msgbox(bgimg='messageboxes/simplegradient0.png',
+                             font=self.std_font)
+
+        # Distribute background sounds and music to all places
+        self.append_bg_sounds()
+
         # End startup screen
         self.end_startupscreen()
 
@@ -96,7 +105,9 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
 
         #self.start_startmenuscreen()
 
+        self.world.set_default_msgbox(self.msgbox)
         self.world.set_leading_character(self.protagonist)
+        self.protagonist.say('Hello')
         self.world.set_place(62, (300, 300))
 
     def run_game(self):

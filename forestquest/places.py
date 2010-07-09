@@ -131,7 +131,7 @@ class PlaceDetails:
         self.p(47, 1.1, .2)
         self.p(48, 1.2, .15)
         self.p(49, 1.65, .1)
-        self.p(50, 1.63, .2)
+        self.p(50, 1.5, .2)
         self.p(51, 1.65, .05)
         self.p(52, 1.66, .05)
         self.g(53, XZigZagWithYPerspective, 100, 1.03, .05)

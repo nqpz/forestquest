@@ -31,6 +31,10 @@ class StartupScreen:
     def loading_data(self, event):
         if event.name == 'beforecharactercreate':
             s = 'Creating character "%s"...' % event.args[1]
+        elif event.name == 'beforesoundcreate':
+            s = 'Creating sound "%s"...' % event.args[1]
+        elif event.name == 'beforemsgboxcreate':
+            s = 'Creating message box %s...' % str(event.args[1])
         elif event.name == 'beforeplacesload':
             self.startup_places_num = event.args[2]
             s = 'Loading places...'
@@ -48,6 +52,10 @@ class StartupScreen:
             s = 'Loading map...'
         elif event.name == 'aftermapload':
             s = 'Finished loading map'
+        elif event.name == 'beforebgsoundsappend':
+            s = 'Appending background sounds'
+        elif event.name == 'afterbgsoundsappend':
+            s = 'Finished appending background sounds'
         self.current_startup_string = s
 
     def animate_startupbg(self):
@@ -58,12 +66,13 @@ class StartupScreen:
         m = len(self.startbgobjs)
         rectsurf = pygame.Surface((620, 50)).convert_alpha()
         rectsurf.fill((255, 255, 255, 200))
+        trect = pygame.Rect(0, 0, 600, 50)
         while not self.animating_startupbg_done:
             self.world.blit(self.startbg)
             self.world.blit(*self.startbgobjs[i])
             self.world.blit(rectsurf, (10, 410))
             self.world.blit(self.std_font.write(self.current_startup_string),
-                            (20, 420))
+                            (20, 420), trect)
             self.world.flip()
             j += 1
             if j == 3:
@@ -83,16 +92,31 @@ class StartupScreen:
                 imp = x.split('-obj')[1].split('.')[0].split('-')
                 num = int(imp[0])
                 pos = [int(y) for y in imp[1].split(',')]
-                self.startbgobjs[num] = (self.world.load_image(path), pos)
+                self.startbgobjs[num] = (self.world.load_image(path, True), pos)
             else:
                 self.startbg = self.world.load_image(path, False)
 
         self.current_startup_string = 'Loading...'
         self.sys.signalactions.add('beforecharactercreate',
                                    self.loading_data)
-        self.sys.signalactions.add('beforeplacesload', self.loading_data)
-        self.sys.signalactions.add('beforeplaceload', self.loading_data)
-        self.sys.signalactions.add('afterplacesload', self.loading_data)
+        self.sys.signalactions.add('beforesoundcreate',
+                                   self.loading_data)
+        self.sys.signalactions.add('beforemsgboxcreate',
+                                   self.loading_data)
+        self.sys.signalactions.add('beforeplacesload',
+                                   self.loading_data)
+        self.sys.signalactions.add('beforeplaceload',
+                                   self.loading_data)
+        self.sys.signalactions.add('afterplacesload',
+                                   self.loading_data)
+        self.sys.signalactions.add('beforeplacesimprove',
+                                   self.loading_data)
+        self.sys.signalactions.add('afterplacesimprove',
+                                   self.loading_data)
+        self.sys.signalactions.add('beforebgsoundsappend',
+                                   self.loading_data)
+        self.sys.signalactions.add('afterbgsoundsappend',
+                                   self.loading_data)
 
         self.animating_startupbg_done = False
         thread(self.animate_startupbg)
@@ -101,6 +125,21 @@ class StartupScreen:
         self.animating_startupbg_done = True
         self.sys.signalactions.remove('beforecharactercreate',
                                    self.loading_data)
-        self.sys.signalactions.remove('beforeplacesload', self.loading_data)
-        self.sys.signalactions.remove('beforeplaceload', self.loading_data)
-        self.sys.signalactions.remove('afterplacesload', self.loading_data)
+        self.sys.signalactions.remove('beforesoundcreate',
+                                      self.loading_data)
+        self.sys.signalactions.remove('beforemsgboxcreate',
+                                      self.loading_data)
+        self.sys.signalactions.remove('beforeplacesload',
+                                      self.loading_data)
+        self.sys.signalactions.remove('beforeplaceload',
+                                      self.loading_data)
+        self.sys.signalactions.remove('afterplacesload',
+                                      self.loading_data)
+        self.sys.signalactions.remove('beforeplacesimprove',
+                                      self.loading_data)
+        self.sys.signalactions.remove('afterplacesimprove',
+                                      self.loading_data)
+        self.sys.signalactions.remove('beforebgsoundsappend',
+                                      self.loading_data)
+        self.sys.signalactions.remove('afterbgsoundsappend',
+                                      self.loading_data)
