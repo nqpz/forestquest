@@ -61,21 +61,25 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
         self.create_world()
         self.world.start()
 
+        #### LOAD DATA BEGIN ####
         self.status('Loading data...')
 
         # Load icon
         self.world.load_icon('icons/icon-32x32.png')
 
+        # Create font
         self.std_font = self.world.create_font(path='fonts/chumbly.ttf')
 
         # Start startup screen
         self.start_startupscreen('startbg')
 
-        # Character creation
-        self.protagonist = self.world.create_character(
-            'protagonist', self.get_path_data('protagonist'))
-        self.world.add_character(self.protagonist)
-        self.world.set_leading_character(self.protagonist)
+        # Load characters
+        self.protagonist = self.load_character('protagonist')
+        self.mantis0 = self.load_character('mantis0')
+
+        # Load sounds and music
+        self.waves = self.load_sound('sounds/birds.ogg')
+        self.waves.play()
 
         # Load places
         self.load_places('places/images', 'places/okpositions',
@@ -88,8 +92,11 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
         # End startup screen
         self.end_startupscreen()
 
+        #### LOAD DATA END ####
+
         #self.start_startmenuscreen()
 
+        self.world.set_leading_character(self.protagonist)
         self.world.set_place(62, (300, 300))
 
     def run_game(self):
