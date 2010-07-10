@@ -75,8 +75,8 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
         self.start_startupscreen('startbg')
 
         # Load characters
-        self.protagonist = self.load_character('protagonist')
-        self.mantis0 = self.load_character('mantis0')
+        self.protagonist = self.load_character('protagonist', name='Guy')
+        self.mantis0 = self.load_character('mantis0', name='Mantis')
 
         # Load sounds and music
         self.sounds = self.load_sounds('sounds')
@@ -107,8 +107,17 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
 
         self.world.set_default_msgbox(self.msgbox)
         self.world.set_leading_character(self.protagonist)
-        self.protagonist.say('Hello')
         self.world.set_place(62, (300, 300))
+
+        self.mantis0.set_position((300, 400))
+        self.mantis0.say('''\
+Hi there! I'm a mantis! I don't really have a name yet, but you can \
+call me Mantis. I am your guide. You don't have name, but you do have \
+a mission. I don't know what it is, but I know it exists. This \
+forest must be investigated by you for further information. That is \
+all I know. But anyway, I must be going now. I have something \
+todo. Good-ely-bye!''', endaction=lambda: self.mantis0.hide())
+
 
     def run_game(self):
         self.status('Full speed!')
