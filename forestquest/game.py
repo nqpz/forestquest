@@ -36,6 +36,7 @@ work. Downloads and installation instructions are available at
 <http://metanohi.org/projects/forestquest/>.'''
 
 try:
+    from pygame.locals import *
     from dililatum.game import GenericGame
     from forestquest.startupscreen import StartupScreen
     from forestquest.startmenuscreen import StartMenu
@@ -76,6 +77,8 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
 
         # Load characters
         self.protagonist = self.load_character('protagonist', name='Guy')
+        self.world.set_leading_character(self.protagonist)
+        self.protagonist.show()
         self.mantis0 = self.load_character('mantis0', name='Mantis')
 
         # Load sounds and music
@@ -92,8 +95,9 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
 
         # Load message boxes
         self.msgbox = \
-            self.load_msgbox(bgimg='messageboxes/simplegradient0.png',
+            self.load_msgbox(path='messageboxes/simplegradient0normal',
                              font=self.std_font)
+        self.world.set_default_msgbox(self.msgbox)
 
         # Distribute background sounds and music to all places
         self.append_bg_sounds()
@@ -105,24 +109,41 @@ Attribution-Share Alike 3.0+ Unported license. Read more about this on
 
         #self.start_startmenuscreen()
 
-        self.world.set_default_msgbox(self.msgbox)
-        self.world.set_leading_character(self.protagonist)
-        self.world.set_place(62, (300, 300))
 
-        self.mantis0.set_position((300, 400))
-        self.mantis0.say('''\
+        def howfeel():
+            self.mantis0.ask('Here I am again. How are you feeling?',
+                             ['Good.', self.mantis0.say, 'That\'s nice.'],
+                             ['Bad.', self.mantis0.say, 'That\'s too bad.'],
+                             ['1 of 10.', self.mantis0.say, 'Go for 2.'],
+                             ['It depends on how you look at it. Maybe I\'m not even here right now. Maybe this digital representation of my very being is just an illusion of something that is not meant to exist.', self.mantis0.say, 'Sure.'],
+                             ['3 of 11.', self.mantis0.say, 'Go for 4.'],
+                             ['Nil.', self.mantis0.say, 'Lin.'],
+                             ['Yo.', self.mantis0.say, 'No.']
+                             )
+        def welcome():
+            self.mantis0.say('''\
 Hi there! I'm a mantis! I don't really have a name yet, but you can \
 call me Mantis. I am your guide. You don't have name, but you do have \
 a mission. I don't know what it is, but I know it exists. This \
 forest must be investigated by you for further information. That is \
 all I know. But anyway, I must be going now. I have something \
-todo. Good-ely-bye!''', endaction=lambda: self.mantis0.hide())
+todo. Good-ely-bye!\nYou should try touching the small box.''', endaction=[self.mantis0.hide])
 
+        def begin(event):
+            self.world.set_place(62, (300, 300))
+            self.mantis0.set_position((300, 400))
+            self.mantis0.show()
+            welcome()
+
+        self.sys.signalactions.add('beforeworldrun', begin)
+        box = self.load_object(imgfile='objects/box0.png', pos=(250, 320),
+                               areaadd=(0, 30), action=[howfeel],
+                               walkonact=False, require=[KEYDOWN, K_SPACE])
+        self.world.places[62].add_object(box)
 
     def run_game(self):
         self.status('Full speed!')
         self.world.run()
-
 
 if __name__ == '__main__':
     print forestquest_help

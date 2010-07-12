@@ -13,7 +13,8 @@ case, "a game" is this game.
 ForestQuest consists of two parts: Code and data. Code is written in
 Python and released under the GNU GPLv3+, while data is generally
 available under the terms of the Creative Commons BY-SA 3.0+
-license. More about this in the file LICENSING.txt.
+license. More about this in the file LICENSING.txt includeded with
+this distribution.
 
 ForestQuest uses the Dililatum library to run itself. At
 http://metanohi.org/projects/dililatum/ you can get a copy of
@@ -45,7 +46,7 @@ new set of APIs. Dililatum is documented.
 
 ForestQuest is a work in progress, and part of its purpose is to be
 a way to more easily develop Dililatum (which, like ForestQuest, is not
-exactly complete right now).
+exactly complete right now). Developers are very welcome.
 
 The current version of ForestQuest is v0.1. The original author is
 Niels Serup <ns@metanohi.org>.

@@ -34,7 +34,7 @@ class StartupScreen:
         elif event.name == 'beforesoundcreate':
             s = 'Creating sound "%s"...' % event.args[1]
         elif event.name == 'beforemsgboxcreate':
-            s = 'Creating message box %s...' % str(event.args[1])
+            s = 'Creating message box "%s"...' % str(event.args[1]['path'])
         elif event.name == 'beforeplacesload':
             self.startup_places_num = event.args[2]
             s = 'Loading places...'
