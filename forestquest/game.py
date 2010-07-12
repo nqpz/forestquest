@@ -36,17 +36,18 @@ work. Downloads and installation instructions are available at
 <http://metanohi.org/projects/forestquest/>.'''
 
 try:
-    from pygame.locals import *
     from dililatum.game import GenericGame
-    from forestquest.startupscreen import StartupScreen
-    from forestquest.startmenuscreen import StartMenu
-    from forestquest.places import PlaceDetails
-    from forestquest.bgmusic import BackgroundMusic
-    import forestquest.generalinformation as ginfo
 except ImportError:
     import sys
     print forestquest_help
     sys.exit()
+
+from pygame.locals import *
+from forestquest.startupscreen import StartupScreen
+from forestquest.startmenuscreen import StartMenu
+from forestquest.places import PlaceDetails
+from forestquest.bgmusic import BackgroundMusic
+import forestquest.generalinformation as ginfo
 
 class Game(GenericGame, StartupScreen, StartMenu, PlaceDetails, BackgroundMusic):
     name = 'ForestQuest'
