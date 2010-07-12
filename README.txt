@@ -50,3 +50,8 @@ exactly complete right now). Developers are very welcome.
 
 The current version of ForestQuest is v0.1. The original author is
 Niels Serup <ns@metanohi.org>.
+
+The logo of ForestQuest, found in the "logo" directory, is available
+under the terms of the Creative Commons Attribution-ShareAlike 3.0 (or
+any later version) Unported license. A copy of this license is
+available at http://creativecommons.org/licenses/by-sa/3.0/

@@ -11,7 +11,7 @@ works under free licenses.
 
 List of files with their respective licenses and authors (inside forestquest/data/)
 ########################################################
-places/*, bike/*, icons/*, sounds/*, messageboxes/*
+places/*, bike/*, icons/*, sounds/*, messageboxes/*, objects/box0.png
 License: CC BY-SA 3.0+
 Author:  Niels Serup <ns@metanohi.org>
 Copyright © 2010 Niels Serup

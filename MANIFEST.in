@@ -1,2 +1,3 @@
 include *.txt
+include logo/*
 recursive-include forestquest *
