@@ -1,5 +1,5 @@
 The Python files of ForestQuest are licensed under the GNU
-General Public License 3.0 (or any later version) This program part of
+General Public License 3.0 (or any later version).
 ForestQuest is copyright © 2010 Niels Serup.
 
 Data files, described more carefully below, are generally licensed

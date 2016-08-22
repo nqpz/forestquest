@@ -2,11 +2,6 @@
 ForestQuest
 ===========
 
-Welcome to the realm of::
-    ┏━┛┏━┃┏━┃┏━┛┏━┛━┏┛┏━┃ ┃ ┃┏━┛┏━┛━┏┛
-    ┏━┛┃ ┃┏┏┛┏━┛━━┃ ┃ ┃ ┃ ┃ ┃┏━┛━━┃ ┃ 
-    ┛  ━━┛┛ ┛━━┛━━┛ ┛ ━━━┛━━┛━━┛━━┛ ┛ 
-
 ForestQuest is an RPG. You have a role. You play a game. And in this
 case, "a game" is this game.
 
